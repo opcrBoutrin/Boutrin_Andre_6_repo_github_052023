@@ -25,7 +25,6 @@ export const header = `
   </header>
 `;
 
-
 export const footer = `
   <footer>
     <nav>

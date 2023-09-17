@@ -258,19 +258,14 @@ li:hover {
   width: 100%;
 }
 
-.label {
-  color: red;
-  border: solid;
-}
 
 #contact {
   width: 50%;
   margin: auto;
-}
-
-#contact > * {
   text-align: center;
 }
+
+
 
 #contact h2 {
   margin-bottom: 20px;
@@ -283,28 +278,38 @@ li:hover {
   flex-direction: column;
 }
 
-#contact input[type="text"],
-input[type="email"],
-input[type="name"],
-input[type="password"] {
+#contact
+ input[type="text"],
+ input[type="email"],
+ input[type="name"] {
   height: 50px;
-  width: 60%;
-  display: block;
+  width: 100%;
+  margin-top: 10px; 
+  margin-bottom: 20px;
   padding: 0 30px;
   font-size: 1.2em;
-  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  border: none; 
+  outline: none
+}
+textarea {
+  width: 100%; 
+  padding: 30px; 
+  height: 50px;
+  margin-top: 7px; 
+  border: none; 
+  outline: none;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#contact label {
-  margin: 2em 0 1em 0;
-}
 
-#contact textarea {
+label {
   display: block;
-  border: none;
-  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  width: 100%; 
+  text-align: left; 
+  margin-bottom: 10px; 
 }
+
 
 #contact input[type="submit"] {
   border: none;
@@ -317,7 +322,10 @@ input[type="password"] {
   border-radius: 60px;
   padding: 15px 40px;
 }
-
+.error {
+  color: red;
+  font-size: 12px;
+}
 footer nav ul {
   display: flex;
   justify-content: flex-end;
@@ -328,15 +336,12 @@ footer nav ul {
   width: 25px;
 }
 
-/* ANDRE--------------------------------- */
-
 main {
   position: relative;
   margin: auto;
   width: 100%;
   margin-top: 50px;
 }
-
 /* ELEMENTS MASQUER */
 
 .en-tete {
@@ -454,10 +459,6 @@ main {
     display: none;
   }
  
-  
-
-
-/* FIN ELEMENT MASQUER */
 .bloc-logo-et-nav {
   position: absolute;
   gap: 40%;
@@ -467,10 +468,6 @@ main {
   width: 100%;
   height: 51px;
 }
-/*
-.bloc-logo-et-nav span {
-    margin-top: 5px;
-} */
 
 /*GALERIES*/
 .gallery {
@@ -531,6 +528,5 @@ figcaption {
 .bloc-btn-modifier-svg {
   justify-content: center;
   display: flex;
-
   gap: 20px;
 }

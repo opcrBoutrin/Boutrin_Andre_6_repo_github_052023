@@ -1,7 +1,7 @@
 import { header, footer } from "./headerFooter.js";
 
 document.addEventListener("DOMContentLoaded", function () {
-document.body.insertAdjacentHTML("afterbegin", header);
+  document.body.insertAdjacentHTML("afterbegin", header);
 
   //Formulaire Login
   const mainContent = `
@@ -9,17 +9,20 @@ document.body.insertAdjacentHTML("afterbegin", header);
       <div id="container-login">
           <h2>Login</h2>
           <form id="form-login">
-              <label for="email-login">Email:</label>
+              <label for="email-login">Email:
               <input type="email" id="email-login" name="email-login" autocomplete="current-password">
+              </label>
               <span id="email-error-login" class="error-message-login"></span>
 
-              <label for="password-login">Mot de passe :</label>
+              <label for="password-login">Mot de passe :
               <input type="password" id="password-login" name="password-login" autocomplete="current-password">
+              </label>
               <span id="password-error-login" class="error-message-login"></span>
 
               <div class="bloc-show-password-login">
-                  <label   for="show-password-login" class="show-password-login">Afficher le mot de passe</label>
+                  <label   for="show-password-login" class="show-password-login">Afficher le mot de passe
                   <input   type="checkbox" id="show-password-login" name="show-password-login"></div>
+                  </label>
               <div id="error-message" class="error-message-login" style="display: none;"></div>
               <button type="button" id="button-login">Se connecter</button>
               <a href="#" id="password-forget-login">Mot de passe oublié</a>
@@ -27,10 +30,10 @@ document.body.insertAdjacentHTML("afterbegin", header);
       </div>
     </main>
   `;
-document.body.insertAdjacentHTML("beforeend", mainContent);
+  document.body.insertAdjacentHTML("beforeend", mainContent);
 
   // Ajout du footer
-document.body.insertAdjacentHTML("beforeend", footer);
+  document.body.insertAdjacentHTML("beforeend", footer);
 
   // Connexion
   const loginButton = document.getElementById("button-login");
@@ -46,7 +49,6 @@ document.body.insertAdjacentHTML("beforeend", footer);
       passwordInput.type = "password";
     }
   });
-  
 
   loginButton.addEventListener("click", function (e) {
     e.preventDefault();

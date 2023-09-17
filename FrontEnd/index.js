@@ -1,9 +1,9 @@
 import { header, footer } from "./headerFooter.js";
 document.addEventListener("DOMContentLoaded", function () {
   const token = window.localStorage.getItem("token");
-  
+
   document.body.insertAdjacentHTML("afterbegin", header);
-  // Page principale ---//   
+  // Page principale ---//
   const mainContent = `
     <div id="introduction">
       <figure>
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
    <section id="contact">
       <h2 id="contactTitre">Contact</h2>
       <p id="contactText">Vous avez un projet ? Discutons-en !</p>
-      <form action="#" method="post" onsubmit="return validateForm()">
+      <form action="#" method="#">
         <label for="name">Nom
         <input type="text" name="name" id="name">
         <span id="name-error" class="error"></span>
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <span id="email-error" class="error"></span>
         </label>
         <label for="message">Message       
-        <textarea name="message" id="message" cols="53" rows="10"></textarea>
+        <textarea  name="message" id="message"></textarea>
         <span id="message-error" class="error"></span>
         </label>
         <input type="submit" value="Envoyer">
@@ -101,7 +101,6 @@ document.addEventListener("DOMContentLoaded", function () {
     window.localStorage.removeItem("isLoggedIn");
     window.location.href = "index.html";
   });
-  
 
   // MODAL-HTML
   const modalContent = `
@@ -175,28 +174,25 @@ document.addEventListener("DOMContentLoaded", function () {
   deleteGalleryButton.addEventListener("click", function () {
     galleryModal.innerHTML = "";
   });
-; 
-function elementIconCorbeillee(figure, imageUrl, imageId, token)
-{
+  function elementIconCorbeillee(figure, imageUrl, imageId, token) {
     const img = document.createElement("img");
     img.src = imageUrl;
     img.alt = "";
     figure.appendChild(img);
-    
+
     const iconCorbeille = document.createElement("span");
     const iconCorbeilleHTML =
       '<span><i class="fa-regular fa-trash-can"></i></span>';
     iconCorbeille.innerHTML = iconCorbeilleHTML;
     figure.appendChild(iconCorbeille);
-    
+
     // pour supprimer l'image et le titre
-        iconCorbeille.addEventListener("click", function () {
-          supprimerImage(imageId, token); // suppression avec l'ID de l'image
-          figure.remove(); // Supprimez la figure du DOM
-      });
+    iconCorbeille.addEventListener("click", function () {
+      supprimerImage(imageId, token); // suppression avec l'ID de l'image
+      figure.remove(); // Supprimez la figure du DOM
+    });
   }
-  
-  
+
   function supprimerImage(imageId, token) {
     //  pour supprimer l'image du serveur
     fetch(`http://localhost:5678/api/works/${imageId}`, {
@@ -207,10 +203,14 @@ function elementIconCorbeillee(figure, imageUrl, imageId, token)
     })
       .then((response) => {
         if (response.ok) {
-          console.log(`Image avec l'ID ${imageId} supprimée avec succès du serveur.`);
+          console.log(
+            `Image avec l'ID ${imageId} supprimée avec succès du serveur.`
+          );
           removeImageFromPage(imageId);
         } else {
-          console.error(`Échec de la suppression de l'image avec l'ID ${imageId} du serveur.`);
+          console.error(
+            `Échec de la suppression de l'image avec l'ID ${imageId} du serveur.`
+          );
         }
       })
       .catch((error) => {
@@ -235,8 +235,6 @@ function elementIconCorbeillee(figure, imageUrl, imageId, token)
     modal1.style.display = "block";
   });
 
-
-
   // éléments avec la classe "close-modal"
   const closeModalButtons = document.querySelectorAll(".close-modal");
   closeModalButtons.forEach(function (button) {
@@ -254,24 +252,24 @@ function elementIconCorbeillee(figure, imageUrl, imageId, token)
     }
   });
 
-  /******************************************************* */
   const uploadImageInput = document.getElementById("upload-image");
   const selectedImageElement = document.getElementById("selected-image");
 
   uploadImageInput.addEventListener("change", function () {
     const selectedImage = uploadImageInput.files[0];
     if (selectedImage) {
-   
-         // Vérification du format de l'image
-    if (!/\.png$|\.jpg$/i.test(selectedImage.name)) {
-      errorMessageElement.textContent = "Le format de l'image doit être .png ou .jpg";
-      selectedImageElement.innerHTML = "";
-      uploadImageInput.value = ""; // Effacez la sélection de fichier incorrecte
-      return;
-    }
-    
+      // Vérification du format de l'image
+      if (!/\.png$|\.jpg$/i.test(selectedImage.name)) {
+        errorMessageElement.textContent =
+          "Le format de l'image doit être .png ou .jpg";
+        selectedImageElement.innerHTML = "";
+        uploadImageInput.value = ""; // Effacez la sélection de fichier incorrecte
+        return;
+      }
+
       // Vérification de la taille de l'image
-      if (selectedImage.size > 4 * 1024 * 1024) { // 4 Mo
+      if (selectedImage.size > 4 * 1024 * 1024) {
+        // 4 Mo
         errorMessageElement.textContent = "L'image ne doit pas dépasser 4 Mo.";
         selectedImageElement.innerHTML = "";
         uploadImageInput.value = ""; // Effacez la sélection de fichier incorrecte
@@ -285,17 +283,15 @@ function elementIconCorbeillee(figure, imageUrl, imageId, token)
     }
   });
 
-  /************************************************** */
   const submitButton = document.querySelector(".submit-button");
   submitButton.addEventListener("click", async () => {
     const title = document.getElementById("titre").value;
     const categoryId = document.getElementById("categorie").value;
     console.log(title, categoryId);
     const uploadImageInput = document.getElementById("upload-image");
-   
+
     console.log(token);
     // Vérification des champs obligatoires
-
     if (!title || !categoryId || !uploadImageInput.files[0]) {
       errorMessageElement.textContent =
         "Veuillez remplir tous les champs obligatoires !";
@@ -309,10 +305,8 @@ function elementIconCorbeillee(figure, imageUrl, imageId, token)
     formData.append("category", "1");
     formData.append("userId", 1);
     console.log(formData);
-    // formData.append('title',)
 
     try {
-      // console.log(token);
 
       const response = await fetch("http://localhost:5678/api/works", {
         method: "POST",
@@ -357,9 +351,6 @@ function elementIconCorbeillee(figure, imageUrl, imageId, token)
         editButton.dataset.imageId = gallery.id;
         figure.appendChild(editButton);
       });
-    
-
-      
     })
     .catch((error) => {
       console.log(
@@ -367,7 +358,7 @@ function elementIconCorbeillee(figure, imageUrl, imageId, token)
         error
       );
     });
-//////////////////////////////////////////////////////////////////////
+
   // Requete galerie accueil et catégories
   Promise.all([
     fetch("http://localhost:5678/api/works").then((response) =>
@@ -437,5 +428,4 @@ function elementIconCorbeillee(figure, imageUrl, imageId, token)
     .catch((error) => {
       console.log("Une erreur s'est produite :", error);
     });
-    
 });
